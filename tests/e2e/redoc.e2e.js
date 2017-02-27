@@ -88,8 +88,9 @@ describe('Language tabs sync', () => {
     var EC = protractor.ExpectedConditions;
     browser.wait(EC.elementToBeClickable($item), 5000);
     $item.click().then(() => {
-      browser.driver.sleep(500);
-      expect($('[operation-id="updatePet"] li.active').getText()).toContain('PHP');
+      var $activeTab = $('[operation-id="updatePet"] li.active');
+      browser.wait(EC.textToBePresentInElement($activeTab, 'PHP'), 5000);
+      expect($activeTab.getText()).toContain('PHP');
     });
   });
 });
